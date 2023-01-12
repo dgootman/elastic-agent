@@ -12,8 +12,16 @@ services:
       - FLEET_URL=${FLEET_URL?}
       - FLEET_ENROLLMENT_TOKEN=${FLEET_ENROLLMENT_TOKEN?}
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Persist agent state
       - agentdata:/usr/share/elastic-agent/state
+
+      # https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+      # https://www.elastic.co/guide/en/beats/metricbeat/current/running-on-docker.html
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /proc:/hostfs/proc:ro
+      - /:/hostfs:ro
 
 volumes:
   agentdata:
