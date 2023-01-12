@@ -4,10 +4,11 @@ services:
   elastic-agent:
     image: docker.elastic.co/beats/elastic-agent:8.6.0
     container_name: elastic-agent
+    hostname: ${HOST?}
     restart: unless-stopped
     user: root
     environment:
       - FLEET_ENROLL=1
-      - FLEET_URL=${FLEET_URL}
-      - FLEET_ENROLLMENT_TOKEN=${FLEET_ENROLLMENT_TOKEN}
+      - FLEET_URL=${FLEET_URL?}
+      - FLEET_ENROLLMENT_TOKEN=${FLEET_ENROLLMENT_TOKEN?}
 
