@@ -11,4 +11,9 @@ services:
       - FLEET_ENROLL=1
       - FLEET_URL=${FLEET_URL?}
       - FLEET_ENROLLMENT_TOKEN=${FLEET_ENROLLMENT_TOKEN?}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - agentdata:/usr/share/elastic-agent/state
 
+volumes:
+  agentdata:
