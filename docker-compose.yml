@@ -11,9 +11,15 @@ services:
       - FLEET_ENROLL=1
       - FLEET_URL=${FLEET_URL?}
       - FLEET_ENROLLMENT_TOKEN=${FLEET_ENROLLMENT_TOKEN?}
+
+      # Timezone info
+      - TZ=America/Vancouver
     volumes:
       # Persist agent state
       - agentdata:/usr/share/elastic-agent/state
+
+      # Timezone info
+      - ./zoneinfo/America/Vancouver:/usr/share/zoneinfo/America/Vancouver:ro
 
       # https://www.elastic.co/guide/en/beats/filebeat/current/running-on-docker.html
       - /var/run/docker.sock:/var/run/docker.sock:ro
